@@ -1,7 +1,15 @@
 /*
     Planetary Intruders
     by Téo Taylor
-    A remix of 'Space Invaders'.
+    A remix of Space Invaders.
+
+    This sketch is a version of Planetary Intruders with assets removed in order to save more available bytes
+    of flash for modifying. This version has no alien animation and the background has been removed, as well as
+    numerous minor details removed. The music has been commented out, but by removing '/*' in 'void PlayMusic' 
+    in the sounds tab, you can enable music in this game. There should be approximately 2 kilobytes of available
+    flash in this version without any modification to the code. The whole perpose of this version is to make it
+    easier to modify without the flash memory limitation. However, if you want this sketch just for playing the
+    game, I highly recommend the original version of Planetary Intruders!
 
     If you'd like to modify the game yourself, here's what you need to know:
     ✧ The sketch (when compiled) states that it takes about 1,820 bytes of RAM, but static local variables
@@ -16,18 +24,15 @@
 
     ✧ But... why am I saying all this anyway?? I think it's pretty unlikely that you'll run out of RAM. 740
       available bytes is quite a lot for an Arduboy.
-
-    ✧ If you have run out of flash memory, then... well... that's a problem. I have tried to free up as much flash
-      as possible, but I think that I have made just about every bit of code in the program use up less flash memory. If you
-      need more flash and are REALLY struggling, remember I have created a version of the game which uses a lot less
-      flash, but has reduced graphics.
-
+      
     ✧ I don't mind if you reupload this game with your changes in it, but please put credits as comments in this
       sketch and in the game. Please don't remove any parts of the 'Info' section in this game.
 
     ✧ I am not that experienced at coding for Arduboy, so if you find something uneffective, like code that runs slowly,
       or something that uses up more flash than it should, please let me know on the Arduboy website! Especially if it's
       flash memory. Even a few bytes counts!
+
+
 
 
     Thank you for reading this. I hope you enjoy this game!
@@ -155,12 +160,9 @@
 
     byte MainScreenMove;       //Another 'TitleScreenMove' function that flickers to 1 to 0 when 'TitleScreenMove' is true.
     byte TitleScreenMove = 1;  //If this variable is true, then it means a game is not on and the user is on the title screen.
-    byte BackgroundOffset = 0;
     byte Menu = 1;
     byte Select = 0;  //Menu and Select are used in the title screen.
     boolean ButtonHold = 0;  //This is used to wait until the player lets go of the button.
-
-    boolean ShowBackground = 1;  //If this it true, the background is rendered. Otherwise, it is not.
 
     byte NewType[3];  //An array for storing the three types of aliens spawned on game type 1, used in saving the game.
 
@@ -172,7 +174,7 @@
 
 void ResetVariables() {
   PlayerX = 60; Lives = 3; Level = 1; CurrentEnemies = 0; EnemyCount = 0; Score = 0; BonusAlienX = 0; BonusAlienInterval = 120; Death = 0; Invulnerable = 0;
-  BackgroundOffset = 0; AppearingEnemyX = 0; AppearingEnemyY = 0; AppearingEnemyType = 0; IncomingY = 20; StartMove = 1; GameType = 1; MegaShot = 0;
+  AppearingEnemyX = 0; AppearingEnemyY = 0; AppearingEnemyType = 0; IncomingY = 20; StartMove = 1; GameType = 1; MegaShot = 0;
   for (byte J = 0; J < MaxEnemies; J++) {
     EnemyType[J] = 0;
   }
@@ -206,9 +208,6 @@ void setup() {
     EEPROM.update(34, 186);          //Chances are, data left by the last game on an Arduboy before this game is not specifically 186.
     EraseSaveProgress();             //If the value is not 186, erase the junk data on EEPROM and set address 34 to the verify value, 186.
   }
-    
-  DrawBackground();
-  Render(PlayerX, 55, 0, WHITE);
 
   TEXT(NameOfThisGame, 5, 32, 1, 1);
   LOAD;
@@ -219,6 +218,7 @@ void setup() {
 }
 
 void loop() {
+  LINE(0, 63, 128, 63, 1);
 
 
   if (TitleScreenMove) {
@@ -233,7 +233,6 @@ void loop() {
     ExplosionSound--;
   }
 
-  DrawBackground();
   SlowControl();
   RunPlayerCode();
   RunEnemyCode();
