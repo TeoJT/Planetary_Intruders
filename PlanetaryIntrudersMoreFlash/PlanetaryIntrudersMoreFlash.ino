@@ -14,23 +14,25 @@
     If you'd like to modify the game yourself, here's what you need to know:
     ✧ The sketch (when compiled) states that it takes about 1,820 bytes of RAM, but static local variables
       in the program use up around an additional 16 bytes, and local variables, particularly used in strings,
-      require about 50 bytes of RAM, so in total you should leave at least 66 bytes of available RAM so errors
-      do not occure in the program.
+      require about 50 bytes of RAM, so in total you should leave at least 66 bytes of available RAM so that
+      errors do not occur in the program.
 
     ✧ If you are having RAM issues in the program (not enough RAM), try reducing the value of MaxEnemies,
-      MaxPlayerLasers, MaxEnemyLasers, and/or MaxParticles to save RAM. Don't worry; if the program exceeds the maximum
+      MaxPlayerLasers, MaxEnemyLasers, MaxParticles to save RAM. Don't worry; if the program exceeds the maximum
       number of Enemies/Lasers/Particles, the entity will not be spawned, thus the program will not crash. However,
       this may affect gameplay (e.g. less enemies will be spawned than intended).
 
     ✧ But... why am I saying all this anyway?? I think it's pretty unlikely that you'll run out of RAM. 740
       available bytes is quite a lot for an Arduboy.
-
+      
     ✧ I don't mind if you reupload this game with your changes in it, but please put credits as comments in this
       sketch and in the game. Please don't remove any parts of the 'Info' section in this game.
 
     ✧ I am not that experienced at coding for Arduboy, so if you find something uneffective, like code that runs slowly,
       or something that uses up more flash than it should, please let me know on the Arduboy website! Especially if it's
       flash memory. Even a few bytes counts!
+
+
 
 
     Thank you for reading this. I hope you enjoy this game!
