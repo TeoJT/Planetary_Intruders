@@ -6,11 +6,11 @@ void UFOAppear() {
     DisplayInfo(WHITE);
     DrawBackground();
     Render(56, AppearingPos, 14, WHITE);
-    LOAD;
+    Display;
     for (byte k = 0; k < 100; k++) {
       if (AudioOn) {
-        ard.tunes.tone(WoozieSound, 1);  //This sound effect sounds, by accident, much better than I originally wanted it to be.
-      }                                  //Connect Arduboy to a speaker instead of its piezo and it sounds really cooool.
+        musicAndSound.tone(WoozieSound, 10);  //This sound effect used to sound really cool in a previous version, but due to library
+      }                                       //change, it is now just a woozy sound effect. Boohoo...
       if (WoozieUpDown) {
         WoozieSound += 4;
       }

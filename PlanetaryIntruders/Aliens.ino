@@ -45,11 +45,11 @@ static const unsigned char Bom[] PROGMEM = {
 //Unused bitmaps which are silhouette of Devils and Rangers.
 /*
 
-static const unsigned char DevilCLEAR[] PROGMEM = {
+static const unsigned char DevilclearDisplay[] PROGMEM = {
 0x36, 0xFF, 0xFC, 0x78, 0x78, 0xFC, 0xFF, 0x36, 
 };
 
-static const unsigned char RangerCLEAR[] PROGMEM = {
+static const unsigned char RangerclearDisplay[] PROGMEM = {
 0x8C, 0x5E, 0xBF, 0x3F, 0x3F, 0xBF, 0x5E, 0x8C, 
 };
 
@@ -90,7 +90,7 @@ void SpawnEnemy(byte PlaceX, byte PlaceY, byte Type, boolean IsThereDelay) {
     EnemyShootInterval[O] = random(40);
   }
   else {
-  //Prepare the ShootInterval for enemies. For Jellies in alien blocks, make their ShootInterval faster so that they shoot loads of lasers while in a big block.
+  //Prepare the ShootInterval for enemies. For Jellies in alien blocks, make their ShootInterval faster so that they shoot displays of lasers while in a big block.
   switch (EnemyType[O]) {
     case 1:
     if (StartMove) {
@@ -125,7 +125,7 @@ void SpawnEnemy(byte PlaceX, byte PlaceY, byte Type, boolean IsThereDelay) {
   if (IsThereDelay) {
     SOUND(1, 234 + O * 24, 1);
     RenderEnemy(O, WHITE, 0);
-    LOAD;
+    Display;
     delay(70);
   }
 }
@@ -139,7 +139,7 @@ void SpawnLaser(byte Xposition, byte Yposition, boolean BombOrNot) {
   if (O >= MaxEnemyLasers) {
     return;  //If there is no space for more lasers, don't spawn a laser.
   }
-  //ard.tunes.tone(4000, 20);            Annoying high-pitched sound.
+  //musicAndSound(4000, 20);            Annoying high-pitched sound.
   LaserX[O] = Xposition;
   LaserY[O] = Yposition;
   LaserBomb[O] = BombOrNot; //If the LaserBomb is true, the laser will be a bomb instead.

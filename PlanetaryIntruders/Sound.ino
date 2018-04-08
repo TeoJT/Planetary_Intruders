@@ -71,7 +71,7 @@ unsigned int ReturnTone(char InputChar) {
 
 void SOUND(byte Type, unsigned int Frequency, byte Duration) {
   if ((AudioOn && (Type == 1) && !TitleScreenMove) || (MusicOn && (Type == 2))) {
-    ard.tunes.tone(Frequency, Duration * 33);
+    musicAndSound.tone(Frequency, Duration * 33);
   }
 }
 

@@ -5,7 +5,7 @@ void BuildBarriers() {
     Render(MusicPlace, 0, 12, 0);
     BarrierHP[MusicPlace] = 8;
     Render(MusicPlace, 0, 12, 1);
-    LOAD;
+    Display;
     MELODY(F("^*)C"), 9);
     delay(256);
   }

@@ -26,7 +26,7 @@ void DeletePlayerLaser(byte PlayerLaserID) {
 }
 
 void EndGame() {
-            CLEAR;
+            clearDisplay;
             ResetVariables();
             StartMove = 0;
             GameType = 10;
@@ -43,7 +43,7 @@ void SpawnLaserIfCommanded() {
         SOUND(1, MegaShotCharge * 6 + 140, 1);
         if (MegaShotCharge == 35) {
           SOLIDRECT(0, 0, 128, 64, 1);
-          LOAD;
+          Display;
           for (byte l = 0; l < MaxPlayerLasers; l++) {
             SpawnPlayerLasers(PlayerX - 27 + l * 6);
           }
@@ -51,7 +51,7 @@ void SpawnLaserIfCommanded() {
           MegaShot = 0;
           ShootDelay = 18;
           delay(50);
-          CLEAR;
+          clearDisplay;
         }
       }
       else {
@@ -176,7 +176,7 @@ void RunPlayerCode() {
             TEXT(F("Score: "), 33, 47, 1, 1);
             ard.print(Score);
             
-            LOAD;
+            Display;
             GameOverMelody();
             delay(2000);
             EndGame();

@@ -1,5 +1,3 @@
-
-
 void IOIndicator(byte pos, boolean OnOff) {  //Display a little square which is filled in for true, and just lines for false.
   if (OnOff) {
     SOLIDRECT(90, pos, 98, pos + 8, WHITE);
@@ -28,12 +26,13 @@ void DisplayValue(byte YPOS, byte inputValue) {
 }
 
 void PrepareNewGame() {
+            while (BButton) {}
             Menu = 0;
             TitleScreenMove = 0;
             ResetVariables();
             StartMove = 0;
             DrawBackground();
-            LOAD;
+            Display;
 }
 
 
@@ -51,7 +50,7 @@ void DisplayInfo(boolean BlackWhite) {
   if (BButton && BlackWhite) {
     PauseGame();
     TEXT(F("Paused"), 31, 18, 2, 1);
-    LOAD;
+    Display;
     while (!BButton) {}
     PauseGame();
   }
@@ -187,8 +186,8 @@ void DisplayInfo(boolean BlackWhite) {
         if ((Menu == 5) && (Select == 3) && (SetGameType != 1))
           Select = 5;
       }
-      if (BButton) {
-        CLEAR;
+      if (AButton) {
+        clearDisplay;
         SOUND(2, 659, 1);
         Menu = 1;
         Select = 0;
@@ -223,9 +222,9 @@ void DisplayInfo(boolean BlackWhite) {
       }
 
       
-      if (AButton) {
+      if (BButton) {
         SOUND(2, 1480, 1);
-        CLEAR;
+        clearDisplay;
         if (Menu == 1) {
           switch (Select) {
             case 0:

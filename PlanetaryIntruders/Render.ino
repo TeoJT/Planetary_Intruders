@@ -169,14 +169,14 @@ void RenderEnemy(byte EnemyID, byte WB, boolean mode) {
   }
   /*
   if (type == 2) {
-    ard.drawBitmap(Xpos, Ypos, RangerCLEAR, 8, 8, BLACK);
+    ard.drawBitmap(Xpos, Ypos, RangerclearDisplay, 8, 8, BLACK);
   }
   if (type == 3) {
-    ard.drawBitmap(Xpos, Ypos, DevilCLEAR, 8, 8, BLACK);
+    ard.drawBitmap(Xpos, Ypos, DevilclearDisplay, 8, 8, BLACK);
   }
   */
   SOLIDRECT(Xpos, Ypos, Xpos + 8, Ypos + 8, BLACK);
-  if (Ani) {
+  if (AnimationTick <= 15) {
     switch (type) {
       case 1:
       ard.drawBitmap(Xpos, Ypos, JellyA, 8, 8, WB);

@@ -17,11 +17,6 @@
     ✧ But... why am I saying all this anyway?? I think it's pretty unlikely that you'll run out of RAM. 740
       available bytes is quite a lot for an Arduboy.
 
-    ✧ If you have run out of flash memory, then... well... that's a problem. I have tried to free up as much flash
-      as possible, but I think that I have made just about every bit of code in the program use up less flash memory. If you
-      need more flash and are REALLY struggling, remember I have created a version of the game which uses a lot less
-      flash, but has reduced graphics.
-
     ✧ I don't mind if you reupload this game with your changes in it, but please put credits as comments in this
       sketch and in the game. Please don't remove any parts of the 'Info' section in this game.
 
@@ -35,7 +30,8 @@
 */
 
 #include <EEPROM.h>
-#include <Arduboy.h>
+#include <Arduboy2.h>
+#include <ArduboyTones.h>
 
 
 //Feel free to change the value of those, but not to something too low.
@@ -56,12 +52,12 @@
 #define BButton ard.pressed(A_BUTTON)        //'B' and 'A' buttons are switched round. 
 #define AButton ard.pressed(B_BUTTON)
 
-#define LOAD ard.display()
-#define CLEAR ard.clearDisplay()
-#define Ani AnimationTick <= 15
+#define Display ard.display()                 //'Display' has to start with capital 'D' because a lower-case 'd' would not compile.
+#define clearDisplay ard.display(CLEAR_BUFFER)
 
 
-    Arduboy ard;
+    Arduboy2 ard;
+    ArduboyTones musicAndSound(ard.audio.enabled);
 
     //This game was originally going to be called "SkyAttackers", because aliens fly down from the
     //sky on planet Earth. However... Sky Attackers... sounds more like a game where you avoid getting
@@ -133,7 +129,7 @@
     byte BonusAlienX = 0;
     byte PowerUpX;
     byte PowerUpY = 0;
-    byte PowerUpType = 3;    //Set to Invincibility power up by default. Because random() is timing-based (I think), there's no point in initializing it to a random value.
+    byte PowerUpType = 1;    //Set to FixBarrier power up by default. Because random() is timing-based (I think), there's no point in initializing it to a random value.
     unsigned int BonusAlienInterval = 120;   //A countdown timer for determining how long it is until the bonus alien appears.
     byte InvulBonus = 1;             //Used when the bonus alien holds the invinciblility power up. When above 20, lasers that hit the alien are reflected.
     boolean BonusTwoHits = 0;        //Used when the bonus alien holds the 1UP power up. Gives the alien two hitpoints.
@@ -196,7 +192,8 @@ void ResetVariables() {
 void setup() {
   ard.begin();
   ard.setFrameRate(30);
-  CLEAR;
+  ard.audio.on();
+  clearDisplay;
   if (BButton) {
     AudioOn = 0;
     MusicOn = 0;
@@ -211,10 +208,10 @@ void setup() {
   Render(PlayerX, 55, 0, WHITE);
 
   TEXT(NameOfThisGame, 5, 32, 1, 1);
-  LOAD;
+  Display;
   GameOverMelody();
   SOLIDRECT(1, 30, 128, 46, BLACK);
-  LOAD;
+  Display;
   AppearingEnemyType = 1;
 }
 
@@ -247,7 +244,7 @@ void loop() {
   DisplayInfo(WHITE);
   //RunSoundTimers();
   
-  LOAD;
+  Display;
   while (!(ard.nextFrame())) {
   }
 
